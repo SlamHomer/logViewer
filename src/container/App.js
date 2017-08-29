@@ -3,11 +3,12 @@ import logo from '../logo.svg';
 import '../App.css';
 import {connect} from "react-redux";
 import {addTest} from "../actions/testActions";
-import LogViewer from "./LogViewer";
-import AddLogViewer from "./AddLogViewer";
+import LogViewer from "../ducks/logViewer/LogViewer";
+import AddLogViewer from "../ducks/logViewer/AddLogViewer";
+import {Accordion, Panel} from "react-bootstrap";
 
 class App extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             logViewerArray: []
@@ -26,11 +27,11 @@ class App extends Component {
                     <AddLogViewer/>
                 </div>
 
-                <div>
-                {
-                    this.createLogViewer()
-                }
-                </div>
+                <Accordion>
+                    {
+                        this.createLogViewer()
+                    }
+                </Accordion>
             </div>
         );
     }
@@ -39,8 +40,12 @@ class App extends Component {
     createLogViewer() {
         let result = this.state.logViewerArray;
 
-        while(this.state.logViewerArray.length < this.props.numberOfLogViewer){
-            result.push(<LogViewer key={"logViewer_"+this.state.logViewerArray.length}/>);
+        while (this.state.logViewerArray.length < this.props.numberOfLogViewer) {
+            result.push(
+                <Panel header={"LogViewer " + this.state.logViewerArray.length} eventKey={this.state.logViewerArray.length}>
+                    <LogViewer key={"logViewer_" + this.state.logViewerArray.length}/>
+                </Panel>
+            );
         }
 
         return result;

@@ -34,6 +34,8 @@ const addDataSourceReducer = (state = {
                 data: ["NOTHING"]
             };
             break;
+        default:
+            state = {...state}
     }
 
     return state;

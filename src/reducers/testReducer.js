@@ -8,6 +8,8 @@ const testReducer = (state = {
                 test1: state.test1 + action.payload
             };
             break;
+        default:
+            state = {...state}
     }
 
     return state;

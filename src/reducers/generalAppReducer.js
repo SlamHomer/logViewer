@@ -9,6 +9,9 @@ const generalAppReducer = (state = {
                 ...state,
                 numberOfLogViewer: ++state.numberOfLogViewer
             };
+            break;
+        default:
+            state = {...state}
     }
 
     return state;
