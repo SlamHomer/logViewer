@@ -42,7 +42,9 @@ class App extends Component {
 
         while (this.state.logViewerArray.length < this.props.numberOfLogViewer) {
             result.push(
-                <Panel header={"LogViewer " + this.state.logViewerArray.length} eventKey={this.state.logViewerArray.length}>
+                <Panel header={"LogViewer " + this.state.logViewerArray.length}
+                       eventKey={this.state.logViewerArray.length}
+                       key={"logViewerPanel_" + this.state.logViewerArray.length}>
                     <LogViewer key={"logViewer_" + this.state.logViewerArray.length}/>
                 </Panel>
             );

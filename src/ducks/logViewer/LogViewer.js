@@ -2,7 +2,7 @@ import * as React from 'react';
 import AutoUpdater from "./AutoUpdater";
 import LogParsedText from "./LogParsedText";
 import FileDragAndDrop from 'react-file-drag-and-drop';
-import {Panel, Well} from "react-bootstrap";
+import {Col, Grid, Panel, Row, Well} from "react-bootstrap";
 
 /**
  * TODO: comment me
@@ -34,7 +34,7 @@ class LogViewer extends React.Component {
 
         function parseFile(file, callback) {
             const fileSize = file.size;
-            const chunkSize = 64 * 1024; // bytes
+            const chunkSize = 32 * 1024; // bytes
             let offset = 0;
             const self = this; // we need a reference to the current object
             let chunkReaderBlock = null;
@@ -95,13 +95,17 @@ class LogViewer extends React.Component {
         };
 
         const dataSourceLoadedView =
-            <div>
-                <AutoUpdater/>
-                <LogParsedText data={this.state.data}/>
-                <div>
+            <Row>
+                <Col xs={12}>
+                    <AutoUpdater/>
+                </Col>
+                <Col xs={12}>
+                    <LogParsedText data={this.state.data}/>
+                </Col>
+                <Col xs={12}>
                     <button onClick={() => removeDataSource()}>REMOVE DATASOURCE</button>
-                </div>
-            </div>;
+                </Col>
+            </Row>;
 
 
         let fileDragAndDropStyle = {
@@ -112,11 +116,13 @@ class LogViewer extends React.Component {
             margin: '5px'
         };
         const dataSourceNotLoadedView =
-            <div style={fileDragAndDropStyle}>
-                <FileDragAndDrop onDrop={addDataSource}>
-                    Drop files here...
-                </FileDragAndDrop>
-            </div>;
+            <Row>
+                <Col xs={12} style={fileDragAndDropStyle}>
+                    <FileDragAndDrop onDrop={addDataSource}>
+                        Drop files here...
+                    </FileDragAndDrop>
+                </Col>
+            </Row>;
 
 
         const getView = () => {
@@ -124,7 +130,9 @@ class LogViewer extends React.Component {
         };
 
         return (
-            getView()
+            <Grid>
+                {getView()}
+            </Grid>
         );
     }
 }
